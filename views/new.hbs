@@ -1,0 +1,40 @@
+<div class="new-form">
+  {{!-- <div>
+    <h3>新增餐廳</h3>
+  </div> --}}
+  <form action="/restaurants" method="POST">
+    <div class="form-group col-8 mb-3 mx-auto">
+      <label for="name">餐廳名稱</label>
+      <input class="form-control" type="text" id="name" placeholder="請輸入中文名稱..." name="name" required>
+    </div>
+    <div class="form-group col-8 mb-3 mx-auto">
+      <label for="category">餐廳分類</label>
+      <input class="form-control" type="text" id="category" placeholder="請輸入分類..." name="category" required>
+    </div>
+    <div class="form-group col-8 mb-3 mx-auto">
+      <label for="image">餐廳圖片</label>
+      <input class="form-control" type="text" id="image" placeholder="請輸入圖片..." name="image" required>
+    </div>
+    <div class="form-group col-8 mb-3 mx-auto">
+      <label for="location">餐廳地址</label>
+      <input class="form-control" type="text" id="location" placeholder="請輸入地址..." name="location" required>
+    </div>
+    <div class="form-group col-8 mb-3 mx-auto">
+      <label for="phone">餐廳電話</label>
+      <input class="form-control" type="text" id="phone" placeholder="請輸入電話..." name="phone" required>
+    </div>
+    <div class="form-group col-8 mb-3 mx-auto">
+      <label for="google_map">餐廳地圖連結</label>
+      <input class="form-control" type="text" id="google_map" placeholder="請輸入地圖連結..." name="google_map" required>
+    </div>
+    <div class="form-group col-8 mb-3 mx-auto">
+      <label for="rating">餐廳評價</label>
+      <input class="form-control" type="number" id="rating" placeholder="請輸入評價..." name="rating" required>
+    </div>
+    <div class="form-group col-8 mb-3 mx-auto">
+      <label for="description">餐廳介紹</label>
+      <input class="form-control" type="text" id="description" placeholder="請輸入介紹..." name="description" required>
+    </div>
+    <button type="submit" class="submit btn btn-primary">確認送出</button>
+  </form>
+</div>

@@ -27,6 +27,19 @@ app.get('/', (req, res) => {
     .catch((error) => console.log(error))
 })
 
+// New
+app.get('/new', (req, res) => {
+  return res.render('new')
+})
+
+app.post('/restaurants', (req, res) => {
+  console.log(req.body)
+  const { name, category, image, location, phone, goole_map, rating, description } = req.body
+  return Restaurant.create({ name, category, image, location, phone, goole_map, rating, description })
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+})
+
 app.listen(3000, () => {
   console.log('App is running on http://localhost:3000')
 })

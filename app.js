@@ -19,6 +19,7 @@ app.use(express.static('public'))
 // app.get('/', (req, res) => {
 //   res.render('index')
 // })
+// 首頁
 app.get('/', (req, res) => {
   Restaurant.find()
     .lean() // 把資料轉換成單純的 JS 物件, Promise(ES6)方法
@@ -27,7 +28,7 @@ app.get('/', (req, res) => {
     .catch((error) => console.log(error))
 })
 
-// New
+// 新增(New)
 app.get('/new', (req, res) => {
   return res.render('new')
 })
@@ -37,6 +38,16 @@ app.post('/restaurants', (req, res) => {
   const { name, category, image, location, phone, goole_map, rating, description } = req.body
   return Restaurant.create({ name, category, image, location, phone, goole_map, rating, description })
     .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+})
+
+// 瀏覽 (Read)
+app.get('/restaurants/:_id', (req, res) => {
+  // console.log(req.params._id)
+  const id = req.params._id
+  return Restaurant.findById(id)
+    .lean()
+    .then(restaurant => res.render('show', { restaurant }))
     .catch(error => console.log(error))
 })
 

@@ -3,6 +3,7 @@ const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 const Restaurant = require('./models/restaurant')
+// var confirmDialog = require('confirm-dialog')
 
 const app = express()
 
@@ -28,7 +29,7 @@ app.get('/', (req, res) => {
     .catch((error) => console.log(error))
 })
 
-// 新增(New)
+// 新增(New)(Create)
 app.get('/new', (req, res) => {
   return res.render('new')
 })
@@ -51,7 +52,7 @@ app.get('/restaurants/:_id', (req, res) => {
     .catch(error => console.log(error))
 })
 
-// edit
+// Edit
 app.get('/restaurants/:_id/edit', (req, res) => {
   console.log(req.params)
   const id = req.params._id
@@ -80,7 +81,19 @@ app.put('/restaurants/:id', (req, res) => {
     .catch(error => console.log(error))
 })
 
-value = "{{restaurant.name}}"
+// Delete
+app.delete('/restaurants/:_id', (req, res) => {
+  const id = req.params._id
+  return Restaurant.findById(id)
+    .then((restaurant) => restaurant.remove())
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+                                               // confirm('確定要刪除資料嗎？') (function() {
+
+                                               // }, function() {
+
+                                               // })
+})
 
 app.listen(3000, () => {
   console.log('App is running on http://localhost:3000')

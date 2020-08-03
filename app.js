@@ -29,6 +29,18 @@ app.get('/', (req, res) => {
     .catch((error) => console.log(error))
 })
 
+// Search
+app.get('/search', (req, res) => {
+  const keyword = req.query.keyword.trim()
+  if (keyword === '') return
+  // keyword = keyword.toLowerCase()
+  console.log(`keyword = ${keyword}`)
+  return Restaurant.find({ name: { $regex: `${keyword}`, $options: 'i' } })
+    .lean()
+    .then((restaurants) => res.render('index', { restaurants: restaurants, keyword }))
+    .catch((error) => console.log(error))
+})
+
 // 新增(New)(Create)
 app.get('/new', (req, res) => {
   return res.render('new')
@@ -88,11 +100,6 @@ app.delete('/restaurants/:_id', (req, res) => {
     .then((restaurant) => restaurant.remove())
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
-                                               // confirm('確定要刪除資料嗎？') (function() {
-
-                                               // }, function() {
-
-                                               // })
 })
 
 app.listen(3000, () => {

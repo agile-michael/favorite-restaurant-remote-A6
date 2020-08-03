@@ -1,0 +1,41 @@
+<div class="alert alert-success text-center" role="alert">
+  <h5>修改餐廳資料</h5>
+</div>
+<form action="/restaurants/{{ restaurant._id }}?_method=PUT" method="POST">
+  <div class="form-group col-8 mb-3 mx-auto">
+    <label for="name">餐廳名稱</label>
+    <input class="form-control" type="text" id="name" placeholder="請輸入中文名稱..." name="name" value="{{restaurant.name}}" required>
+  </div>
+  <div class="form-group col-8 mb-3 mx-auto">
+    <label for="category">餐廳分類</label>
+    <input class="form-control" type="text" id="category" placeholder="請輸入分類..." name="category" value="{{restaurant.category}}" required>
+  </div>
+  <div class="form-group col-8 mb-3 mx-auto">
+    <label for="image">餐廳圖片</label>
+    <input class="form-control" type="text" id="image" placeholder="請輸入圖片..." name="image" value="{{restaurant.image}}" required>
+  </div>
+  <div class="form-group col-8 mb-3 mx-auto">
+    <label for="location">餐廳地址</label>
+    <input class="form-control" type="text" id="location" placeholder="請輸入地址..." name="location" value="{{restaurant.location}}" required>
+  </div>
+  <div class="form-group col-8 mb-3 mx-auto">
+    <label for="phone">餐廳電話</label>
+    <input class="form-control" type="text" id="phone" placeholder="請輸入電話..." name="phone" value="{{restaurant.phone}}" required>
+  </div>
+  <div class="form-group col-8 mb-3 mx-auto">
+    <label for="google_map">餐廳地圖連結</label>
+    <input class="form-control" type="text" id="google_map" placeholder="請輸入地圖連結..." name="google_map" value="{{restaurant.google_map}}" required>
+  </div>
+  <div class="form-group col-8 mb-3 mx-auto">
+    <label for="rating">餐廳評價</label>
+    <input class="form-control" type="number" id="rating" placeholder="請輸入評價..." name="rating" value="{{restaurant.rating}}">
+  </div>
+  <div class="form-group col-8 mb-3 mx-auto">
+    <label for="description">餐廳介紹</label>
+    <input class="form-control" type="text" id="description" placeholder="請輸入介紹..." name="description" value="{{restaurant.description}}"  required>
+  </div>
+  <button
+    type="submit"
+    class="submit btn btn-primary"
+  >修改送出</button>
+</form>

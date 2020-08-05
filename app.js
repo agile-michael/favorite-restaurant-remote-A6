@@ -31,25 +31,29 @@ app.get('/', (req, res) => {
 
 // Search
 app.get('/search', (req, res) => {
-  const keyword = req.query.keyword.trim()
+  let keyword = ''
+  keyword = req.query.keyword.trim()
+  console.log(`keyword=[${keyword}] ${keyword.length}`)
   if (keyword === '') return
-  // keyword = keyword.toLowerCase()
-  console.log(`keyword = ${keyword}`)
-  return Restaurant.find({ name: { $regex: `${keyword}`, $options: 'i' } })
-    .lean()
-    .then((restaurants) => res.render('index', { restaurants: restaurants, keyword }))
-    .catch((error) => console.log(error))
+  else {
+    keyword = keyword.toLowerCase()
+    console.log(`keyword = ${keyword}`)
+    return Restaurant.find({ name: { $regex: `${keyword}`, $options: 'i' } })
+      .lean()
+      .then((restaurants) => res.render('index', { restaurants: restaurants, keyword }))
+      .catch((error) => console.log(error))
+  }
 })
 
 // 新增(New)(Create)
-app.get('/new', (req, res) => {
+app.get('/restaurants/new', (req, res) => {
   return res.render('new')
 })
 
 app.post('/restaurants', (req, res) => {
   console.log(req.body)
-  const { name, category, image, location, phone, goole_map, rating, description } = req.body
-  return Restaurant.create({ name, category, image, location, phone, goole_map, rating, description })
+  const { name, category, image, location, phone, google_map, rating, description } = req.body
+  return Restaurant.create(req.body)
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
@@ -79,14 +83,7 @@ app.put('/restaurants/:id', (req, res) => {
   const { name, category, image, location, phone, google_map, rating, description } = req.body
   return Restaurant.findById(id)
     .then((restaurant) => {
-      restaurant.name = name
-      restaurant.category = category
-      restaurant.image = image
-      restaurant.location = location
-      restaurant.phone = phone
-      restaurant.google_map = google_map
-      restaurant.rating = rating
-      restaurant.description = description
+      restaurant = Object.assign(restaurant, req.body)
       return restaurant.save()
     })
     .then(() => res.redirect(`/restaurants/${id}`))

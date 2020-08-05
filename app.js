@@ -33,11 +33,12 @@ app.get('/', (req, res) => {
 app.get('/search', (req, res) => {
   let keyword = ''
   keyword = req.query.keyword.trim()
-  console.log(`keyword=[${keyword}] ${keyword.length}`)
-  if (keyword === '') return
+  // console.log(`keyword=[${keyword}] ${keyword.length}`)
+  if (keyword === '') 
+    res.redirect('/')
   else {
     keyword = keyword.toLowerCase()
-    console.log(`keyword = ${keyword}`)
+    // console.log(`keyword = ${keyword}`)
     return Restaurant.find({ name: { $regex: `${keyword}`, $options: 'i' } })
       .lean()
       .then((restaurants) => res.render('index', { restaurants: restaurants, keyword }))
